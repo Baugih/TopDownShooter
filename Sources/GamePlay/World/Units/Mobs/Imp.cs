@@ -24,7 +24,7 @@ namespace TopDownShooter
         public override void Update(Vector2 offset, Hero hero)
         {
          
-            base.Update(offset);
+            base.Update(offset, hero);
         }
 
         public override void Draw(Vector2 offset)
