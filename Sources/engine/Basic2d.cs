@@ -10,7 +10,7 @@ namespace TopDownShooter
     public class Basic2d
     {
         public float rot;
-        public Vector2 pos, dims;
+        public Vector2 pos, dims, frameSize;
         public Texture2D myModel;
 
         public Basic2d(string path, Vector2 pos, Vector2 dims)
