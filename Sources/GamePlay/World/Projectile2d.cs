@@ -1,14 +1,18 @@
-﻿using System;
+﻿#region Includes
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Input.Touch;
 using Microsoft.Xna.Framework.Media;
+#endregion
 
 namespace TopDownShooter
 {
@@ -23,51 +27,62 @@ namespace TopDownShooter
         public Unit owner;
 
         public McTimer timer;
-        public Projectile2d(string path, Vector2 pos, Vector2 dims, Unit owner, Vector2 target) : base(path, pos, dims)
-        {
-            speed = 5.0f;
-            done = false;
-            this.direction = target - owner.pos;
-            this.direction.Normalize();
-            this.owner = owner;
-            rot = Globals.RotateTowards(pos, new Vector2(target.X, target.Y));
 
-            timer = new McTimer(3000);
+        public Projectile2d(string PATH, Vector2 POS, Vector2 DIMS, Unit OWNER, Vector2 TARGET)
+            : base(PATH, POS, DIMS)
+        {
+            done = false;
+
+            speed = 5.0f;
+
+            owner = OWNER;
+
+            direction = TARGET - owner.pos;
+            direction.Normalize();
+
+            rot = Globals.RotateTowards(pos, new Vector2(TARGET.X, TARGET.Y));
+
+            timer = new McTimer(1200);
         }
 
-        public virtual void Update(Vector2 offset, List<Unit> units)
+        public virtual void Update(Vector2 OFFSET, List<Unit> UNITS)
         {
             pos += direction * speed;
 
 
+
             timer.UpdateTimer();
-            if (timer.Test())
+            if(timer.Test())
             {
+
                 done = true;
             }
 
-            if (HitSomething(units))
+            if(HitSomething(UNITS))
             {
+
                 done = true;
             }
         }
 
-        public virtual bool HitSomething(List<Unit> units)
+        public virtual bool HitSomething(List<Unit> UNITS)
         {
-
-            for(int i=0; i<units.Count; i++)
+            for(int i=0; i<UNITS.Count; i++)
             {
-                if (Globals.GetDistance(pos, units[i].pos) < units[i].hitDist)
+                if(Globals.GetDistance(pos, UNITS[i].pos) < UNITS[i].hitDist)
                 {
-                    units[i].getHit();
+                    UNITS[i].GetHit(1);
                     return true;
                 }
             }
+
             return false;
         }
-        public override void Draw(Vector2 offset)
+
+
+        public override void Draw(Vector2 OFFSET)
         {
-            base.Draw(offset);
+            base.Draw(OFFSET);
         }
     }
 }

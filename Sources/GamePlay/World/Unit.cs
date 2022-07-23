@@ -1,44 +1,60 @@
-﻿using System;
+﻿#region Includes
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Input.Touch;
 using Microsoft.Xna.Framework.Media;
+#endregion
 
 namespace TopDownShooter
 {
     public class Unit : Basic2d
-
     {
         public bool dead;
-        public float speed, hitDist;
-        public Unit(string path, Vector2 pos, Vector2 dims) : base(path, pos, dims)
+
+        public float speed, hitDist, health, healthMax;
+
+        public Unit(string PATH, Vector2 POS, Vector2 DIMS) : base(PATH, POS, DIMS)
         {
             dead = false;
             speed = 2.0f;
 
+            health = 1;
+            healthMax = health;
+
             hitDist = 35.0f;
         }
 
-        public override void Update(Vector2 offset)
+        public virtual void Update(Vector2 OFFSET, Player ENEMY)
         {
-            base.Update(offset);
+
+
+            base.Update(OFFSET);
         }
 
-        public virtual void getHit()
+
+        public virtual void GetHit(float DAMAGE)
         {
-            dead = true;
+            health -= DAMAGE;
+
+            if(health <= 0)
+            {
+                dead = true;
+            }
+
         }
 
-        public override void Draw(Vector2 offset)
+        public override void Draw(Vector2 OFFSET)
         {
-            base.Draw(offset);
+            base.Draw(OFFSET);
         }
-
     }
 }

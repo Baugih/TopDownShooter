@@ -30,7 +30,7 @@ namespace TopDownShooter
         public static SpriteBatch spriteBatch;
 
 
-        public static IKeyboard keyboard;
+        public static McKeyboard keyboard;
         public static McMouseControl mouse;
 
         public static GameTime gameTime;

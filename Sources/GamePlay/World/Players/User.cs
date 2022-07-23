@@ -16,26 +16,20 @@ using Microsoft.Xna.Framework.Media;
 
 namespace TopDownShooter
 {
-    public class Fireball : Projectile2d
+    public class User : Player
     {
 
-        public Fireball(Vector2 POS, Unit OWNER, Vector2 TARGET)
-            : base("2d\\Projectiles\\Fireball", POS, new Vector2(20, 20), OWNER, TARGET)
+
+        public User() : base()
         {
-
-
+            hero = new Hero("2d\\Hero", new Vector2(300, 300), new Vector2(64, 64));
         }
 
-        public override void Update(Vector2 OFFSET, List<Unit> UNITS)
+        public override void Update(Player ENEMY, Vector2 OFFSET)
         {
-            base.Update(OFFSET, UNITS);
+            base.Update(ENEMY, OFFSET);
         }
 
 
-
-        public override void Draw(Vector2 OFFSET)
-        {
-            base.Draw(OFFSET);
-        }
     }
 }

@@ -1,44 +1,56 @@
-﻿using System;
+﻿#region Includes
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Input.Touch;
 using Microsoft.Xna.Framework.Media;
+#endregion
 
 namespace TopDownShooter
 {
     public class Mob : Unit
-
     {
-        
-        public Mob(string path, Vector2 pos, Vector2 dims) : base(path, pos, dims)
+
+        public Mob(string PATH, Vector2 POS, Vector2 DIMS)
+            : base(PATH, POS, DIMS)
         {
             speed = 2.0f;
         }
 
-        public virtual void Update(Vector2 offset, Hero hero)
+        public override void Update(Vector2 OFFSET, Player ENEMY)
         {
-            AI(hero);
-            base.Update(offset);
-        }
+            AI(ENEMY.hero);
 
-        public virtual void AI(Hero hero)
-        {
-            this.pos += Globals.RadialMovement(hero.pos, pos, speed);
-            rot = Globals.RotateTowards(pos, hero.pos);
+            base.Update(OFFSET);
         }
 
 
-
-        public override void Draw(Vector2 offset)
+        public virtual void AI(Hero HERO)
         {
-            base.Draw(offset);
+            pos += Globals.RadialMovement(HERO.pos, pos, speed);
+            rot = Globals.RotateTowards(pos, HERO.pos);
+
+
+            if(Globals.GetDistance(pos, HERO.pos) < 15)
+            {
+                HERO.GetHit(1);
+                dead = true;
+            }
         }
 
+        
+
+        public override void Draw(Vector2 OFFSET)
+        {
+            base.Draw(OFFSET);
+        }
     }
 }
