@@ -32,8 +32,8 @@ namespace TopDownShooter
         {
             // TODO: Add your initialization logic here
 
-            Globals.screenWidth = 800; //1600
-            Globals.screenHeight = 500; //900
+            Globals.screenWidth = 1500; //1600
+            Globals.screenHeight = 1000; //900
 
             graphics.PreferredBackBufferWidth = Globals.screenWidth;
             graphics.PreferredBackBufferHeight = Globals.screenHeight;
@@ -53,7 +53,6 @@ namespace TopDownShooter
             Globals.content = this.Content;
             Globals.spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
 
             cursor = new Basic2d("2d\\Misc\\CursorArrow", new Vector2(0, 0), new Vector2(28, 28));
 

@@ -28,7 +28,7 @@ namespace TopDownShooter
         {
             boarder = BOARDER;
             color = COLOR;
-
+            Console.Write("salut");
             bar = new Basic2d("2d\\Misc\\solid", new Vector2(0, 0), new Vector2(DIMS.X - boarder * 2, DIMS.Y - boarder * 2));
             barBKG = new Basic2d("2d\\Misc\\shade", new Vector2(0, 0), new Vector2(DIMS.X, DIMS.Y));
         }
